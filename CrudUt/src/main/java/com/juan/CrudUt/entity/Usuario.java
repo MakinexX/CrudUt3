@@ -6,10 +6,14 @@ import lombok.Data;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usuario")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Id
@@ -21,6 +25,8 @@ public class Usuario {
 
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String userName;
 
     @Column(nullable = false, unique = true, updatable = false) // updatable = false para evitar modificaciones
     private String apiKey;

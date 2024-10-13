@@ -4,6 +4,7 @@ import com.juan.CrudUt.entity.Persona;
 import com.juan.CrudUt.entity.Usuario;
 import com.juan.CrudUt.repository.PersonaRepository;
 import com.juan.CrudUt.repository.UsuarioRepository;
+import com.juan.CrudUt.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,15 @@ public class PersonaService {
 
         // Guardar persona y usuario
         return personaRepository.save(persona);
+    }
+    
+    public String registrarPersona(Persona person){
+        if(person!=null & person.getId()!=null & personaRepository.findById(person.getId()).isPresent()){
+            personaRepository.save(person);;
+            return new TokenService().generateToken(person.getUsuario().getApiKey());
+        }else{
+            return "f no se pudo";
+        }
     }
 
     private String generarLogin(Persona persona) {

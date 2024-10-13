@@ -91,4 +91,8 @@ public class PersonaController {
         List<Persona> personas = personaService.buscarPorPapellido(papellido);
         return ResponseEntity.ok(personas);
     }
+    @PostMapping("/regist")
+    public String Registrar(@RequestBody Persona persona){
+        return this.personaService.registrarPersona(persona);        
+    }    
 }
